@@ -21,6 +21,7 @@ public class Player extends Entity {
 	int standCounter = 0;
 	
 	
+	
 	 public Player(GamePanel gp , KeyHandler KeyH) {
 		 
 		 this.gp = gp;
@@ -32,7 +33,7 @@ public class Player extends Entity {
 		 solidArea = new Rectangle();
 		 solidArea.x = 8; // we made solid area under the character tile ,
 		                  // so we easily pass through the collision tile.
-		 solidArea.y = 16;
+		 solidArea.y = 8;
 		 solidAreaDefaultX = solidArea.x;
 		 solidAreaDefaultY = solidArea.y;
 		 solidArea.width = 32;
@@ -66,75 +67,81 @@ public class Player extends Entity {
 		}
 	}
 	public void update() {
-		
-		if(KeyH.upPressed == true || KeyH.downPressed == true || 
-				// manually start moving character only this statement
-				KeyH.leftPressed == true || KeyH.rightPressed == true) {
-			
-			
-			
-			if(KeyH.upPressed == true) {
-				direction = "up";
-          
-			}
-			else if (KeyH.downPressed == true) {
-				direction = "down";
-		   
-			}
-			else if (KeyH.leftPressed == true) {
-				direction = "left";
-			
-			}
-			else if (KeyH.rightPressed == true) {
-				direction = "right";
-			
-			}
-			// check tile collision 
-			
-			collisionOn = false;
-			gp.cChecker.checkTile(this);
-			
-			// check object collision 
-			int objIndex = gp.cChecker.checkObject(this, true);
-			pickUpObject(objIndex);
-			
-			 // if collision is false , player can move 
-			if (collisionOn == false) {
-				switch(direction) {
-				case "up":  worldY -= speed;	
-					break;
-				case "down": worldY += speed;
-					break;
-				case "left": worldX -= speed;
-					break;
-				case "right": worldX += speed;
-					break;
+	
+			if(KeyH.upPressed == true || KeyH.downPressed == true || 
+					// manually start moving character only this statement
+					KeyH.leftPressed == true || KeyH.rightPressed == true) {
+				
+				if(KeyH.upPressed == true) {
+					direction = "up";
+	          
 				}
-			}
-			
-			spriteCounter++;  // basically it means the player changes in every 10 frames
-			if(spriteCounter > 12) { // motion of character by how much speed moving
-				if(spriteNum == 1 ) {
-					spriteNum = 2;
+				else if (KeyH.downPressed == true) {
+					direction = "down";
+			   
 				}
-				else if(spriteNum == 2) {
-					spriteNum = 1;
+				else if (KeyH.leftPressed == true) {
+					direction = "left";
+				
+				}
+				else if (KeyH.rightPressed == true) {
+					direction = "right";
+				
 				}
 				
-				spriteCounter = 0;
-			}  
-		}
-		else {
-			
-			standCounter++;
-			
-			if(standCounter == 20) {
-				spriteNum = 1;
-				standCounter = 0;
+				// check tile collision 
+				
+				collisionOn = false;
+				gp.cChecker.checkTile(this);
+				
+				// check object collision 
+				int objIndex = gp.cChecker.checkObject(this, true);
+				pickUpObject(objIndex);
+				
+				 // if collision is false , player can move 
+				if (collisionOn == false) {
+					switch(direction) {
+					case "up":  worldY -= speed;	
+						break;
+					case "down": worldY += speed;
+						break;
+					case "left": worldX -= speed;
+						break;
+					case "right": worldX += speed;
+						break;
+					}
+				}
+				
+				spriteCounter++;  // basically it means the player changes in every 10 frames
+				if(spriteCounter > 12) { // motion of character by how much speed moving
+					if(spriteNum == 1 ) {
+						spriteNum = 2;
+					}
+					else if(spriteNum == 2) {
+						spriteNum = 1;
+					}
+					
+					spriteCounter = 0;
+				} 
 			}
+			else {
+				
+				standCounter++;
+				
+				if(standCounter == 20) {
+					spriteNum = 1;
+					standCounter = 0;
+				}
+			}
+	
+		
 			
+			
+		
 		}
-	 }
+		
+		
+		
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
