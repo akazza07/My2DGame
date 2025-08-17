@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
 	GamePanel gp;
@@ -28,56 +29,38 @@ public class TileManager {
 		loadMap("/maps/world01.txt");
 	}
 	public void getTileImage() {  // in this we have to add tiles
+		
+			setup(0,"grass",false);
+			setup(1,"wall3",true);
+			setup(2,"water",true);
+			setup(3,"mat1",false);
+			setup(4,"tree",true);
+			setup(5,"sand1",false);
+			setup(6,"wall2",true);
+			setup(7,"banner",false);
+			setup(8,"flower",false);
+			setup(9,"wall1",true);
+		
+		}
+	public void setup(int index , String imageName , boolean collision) {
+		
+		UtilityTool uTool = new UtilityTool();
 		try {
-			
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-			
-			BufferedImage scaledImage = new BufferedImage(gp.tileSize , gp.tileSize , tile[0].image.getType());
-			Graphics2D g2 = scaledImage.createGraphics(); 
-			// this line means whatever this g2 is gonna draw will be saved in this scaled image
-			g2.drawImage(tile[0].image,0,0,gp.tileSize,gp.tileSize,null); 
-			// this g2 draws this image with this scaled size and so the scaled image will be saved in this scaled image.
-			tile[0].image = scaledImage;
-			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall3.png"));
-			tile[1].collision = true;
-			
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-			tile[2].collision = true;
-			
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/mat1.png"));
-			
-			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-			tile[4].collision = true;
-			
-			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand1.png"));
-			
-			tile[6] = new Tile();
-			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall2.png"));
-			tile[6].collision = true;
-			
-			tile[7] = new Tile();
-			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/banner.png"));
-			
-			tile[8] = new Tile();
-			tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/flower.png"));
-			
-			tile[9] = new Tile();
-			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall1.png"));
-			tile[9].collision = true;
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName +".png"));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+					
+		}catch(IOException e) {
+			e.printStackTrace();
 			
 			
-	}catch(IOException e) {
-		e.printStackTrace();
-	
+		}
+		
+		
 	}
-  }
+	
+	
 	public void loadMap(String filePath) {
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
@@ -139,7 +122,7 @@ public class TileManager {
 			   worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 			   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY ) {
 				
-			       g2.drawImage(tile[tileNum].image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+			       g2.drawImage(tile[tileNum].image,screenX,screenY,null);
 			       
 			}
 			worldCol++;
