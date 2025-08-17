@@ -1,6 +1,7 @@
 package tile;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +32,13 @@ public class TileManager {
 			
 			tile[0] = new Tile();
 			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
+			
+			BufferedImage scaledImage = new BufferedImage(gp.tileSize , gp.tileSize , tile[0].image.getType());
+			Graphics2D g2 = scaledImage.createGraphics(); 
+			// this line means whatever this g2 is gonna draw will be saved in this scaled image
+			g2.drawImage(tile[0].image,0,0,gp.tileSize,gp.tileSize,null); 
+			// this g2 draws this image with this scaled size and so the scaled image will be saved in this scaled image.
+			tile[0].image = scaledImage;
 			
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall3.png"));
