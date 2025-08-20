@@ -32,16 +32,16 @@ public class TileManager {
 		    // we don't use the tile 0 to 9 but I've set a placeholder image so we can prevent NullPointer exception happens when we scan array
 		
 		    // PLACEHOLDER
-			setup(0,"grass",false);
-			setup(1,"grass",false);
-			setup(2,"grass",false);
-			setup(3,"grass",false);
-			setup(4,"grass",false);
-			setup(5,"grass",false);
-			setup(6,"grass",false);
-			setup(7,"grass",false);
-			setup(8,"grass",false);
-			setup(9,"grass",false);
+			setup(0, "grass", false);
+			setup(1, "grass", false);
+			setup(2, "grass", false);
+			setup(3, "grass", false);
+			setup(4, "grass", false);
+			setup(5, "grass", false);
+			setup(6, "grass", false);
+			setup(7, "grass", false);
+			setup(8, "grass", false);
+			setup(9, "grass", false);
 			
 			// PLACEHOLDER
 			setup(10,"grass",false);
@@ -60,6 +60,7 @@ public class TileManager {
 			setup(23,"water11",true);
 			setup(24,"water12",true);
 			setup(25,"water13",true);
+			
 			setup(26,"road00",false);
 			setup(27,"road01",false);
 			setup(28,"road02",false);
@@ -77,6 +78,7 @@ public class TileManager {
 			setup(41,"wall1",true);
 			setup(42,"tree",true);
 		}
+	
 	public void setup(int index , String imageName , boolean collision) {
 		
 		UtilityTool uTool = new UtilityTool();
@@ -88,13 +90,10 @@ public class TileManager {
 					
 		}catch(IOException e) {
 			e.printStackTrace();
-			
-			
+				
 		}
-		
-		
+			
 	}
-	
 	
 	public void loadMap(String filePath) {
 		try {
