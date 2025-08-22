@@ -41,6 +41,8 @@ public class Entity { // this stores variables that will be used in player , mon
 		
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
+		gp.cChecker.checkObject(this,false);
+		gp.cChecker.checkPlayer(this);
 		
 		 // if collision is false , player can move 
 		if (collisionOn == false) {
