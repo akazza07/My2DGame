@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -46,7 +47,7 @@ public final class GamePanel extends JPanel implements Runnable{
     // ENTITY AND OBJECT
     public Player player = new Player(this,KeyH);
     public SuperObject obj[] = new SuperObject[10]; // we prepared 10 slots during the game 
-    
+    public Entity npc[] = new Entity[10];
     // GAME STATE
        public int gameState;
        public final int playState = 1;
@@ -71,7 +72,7 @@ public final class GamePanel extends JPanel implements Runnable{
     }
     public void setupGame() {
     	aSetter.setObjects();
-    	
+    	aSetter.setNPC();
     	playMusic(0);
     	gameState = playState;
     }
@@ -188,7 +189,12 @@ public final class GamePanel extends JPanel implements Runnable{
 				obj[i].draw(g2,this);
 			}
 		}
-		
+		// NPC 
+		for(int i = 0 ; i < npc.length ; i++) {
+			if(npc[i] != null) {
+				npc[i].draw(g2);
+			}
+		}
 	    // PLAYER
 		player.draw(g2);
 		
