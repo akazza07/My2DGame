@@ -18,7 +18,7 @@ public class Player extends Entity {
 	
 	public final int screenX;
 	public final int screenY;
-	public int hasKey = 0;
+//	public int hasKey = 0;
 	int standCounter = 0;
 	
 	
@@ -154,7 +154,9 @@ public class Player extends Entity {
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			String objectName = gp.obj[i].name;
+			
+			
+	/*		String objectName = gp.obj[i].name;
 			
 			switch(objectName) {
 			case"Key":
@@ -187,7 +189,8 @@ public class Player extends Entity {
 				gp.stopMusic();
 				gp.playSE(4);
 				break;
-			}
+			} 
+			**/
 		}		
 	}
 	

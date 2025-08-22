@@ -32,7 +32,7 @@ public final class GamePanel extends JPanel implements Runnable{
     
     // SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler KeyH = new KeyHandler();
+    KeyHandler KeyH = new KeyHandler(this);
     
     Sound music = new Sound();
     Sound se = new Sound();
@@ -47,7 +47,11 @@ public final class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this,KeyH);
     public SuperObject obj[] = new SuperObject[10]; // we prepared 10 slots during the game 
     
-    
+    // GAME STATE
+       public int gameState;
+       public final int playState = 1;
+       public final int pauseState = 2;
+       
     // set player's default position
     // int playerX = 100;
     // int playerY = 100;
@@ -69,6 +73,7 @@ public final class GamePanel extends JPanel implements Runnable{
     	aSetter.setObjects();
     	
     	playMusic(0);
+    	gameState = playState;
     }
     public void startGameThread() {
     	gameThread = new Thread(this);
@@ -149,6 +154,12 @@ public final class GamePanel extends JPanel implements Runnable{
 	}
 	public void update() {
 		
+		if(gameState == playState) {
+			player.update();
+		}
+		if(gameState == pauseState) {
+			// nothing
+		}
 		player.update();
 	}
 	public void paintComponent(Graphics g) {  // java in-build method 
