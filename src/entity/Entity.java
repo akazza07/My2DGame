@@ -28,6 +28,7 @@ public class Entity { // this stores variables that will be used in player , mon
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collision = false;
 	public boolean collisionOn;
+	public int actionLockCounter = 0;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
