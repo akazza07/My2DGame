@@ -1,13 +1,9 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.text.DecimalFormat;
-
-import object.OBJ_Key;
-
 public class UI {
 	
    GamePanel gp;
@@ -21,8 +17,9 @@ public class UI {
    int messageCounter = 0;
    public boolean gameFinished = false;
    
-   double playTime;
-   DecimalFormat dFormat = new DecimalFormat("#0.00"); 
+   // double playTime;
+   // DecimalFormat dFormat = new DecimalFormat("#0.00");
+   
    // means , we display up to tow places of decimal 
    public UI(GamePanel gp) {
 	   this.gp = gp;
@@ -44,11 +41,16 @@ public class UI {
 	   g2.setFont(arial_40);
 	   g2.setColor(Color.white);
 	   
+	   // PLAY STATE
 	   if(gp.gameState == gp.playState) {
 		   // Do playState stuff later
-		   
+	   // PAUSE STATE   
 	   }if(gp.gameState == gp.pauseState) {
 		   drawPauseScreen();
+	   }
+	   // DIALOGUE STATE
+	   if(gp.gameState == gp.dialogueState) {
+		   drawDialogueScreen();
 	   }
 /*	   if(gameFinished == true ) {
 		   
@@ -121,6 +123,28 @@ public class UI {
 	   int y = gp.screenHeight/2;
 	   
 	   g2.drawString(text, x, y);
+   }
+   public void drawDialogueScreen() {
+	   
+	   // WINDOW
+	   int x = gp.tileSize*2;
+	   int y = gp.tileSize/2;
+	   int width = gp.screenWidth - (gp.tileSize*4);
+	   int height = gp.tileSize*4;
+	   
+	   drawSubWindow(x,y,width,height);
+	   
+   }
+   public void drawSubWindow(int x , int y , int width , int height ) {
+	   
+	   Color c = new Color(0,0,0); // new Color(int,int,int) = Create RGB color
+	   g2.setColor(c);
+	   g2.fillRoundRect(x, y, width, height, 35, 35);
+	   
+	   c = new Color(255,255,255); // this is the RGB number for white
+	   g2.setColor(c);
+	   g2.setStroke(new BasicStroke(5)); // Defines the width of outlines of graphics which are rendered with a Graphics2D
+	   g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
    }
    public int getXforCenteredText(String text) {
 	   int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
