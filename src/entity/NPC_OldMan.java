@@ -30,8 +30,8 @@ public class NPC_OldMan extends Entity {
 	}
 	public void setDialogue() {
 		dialogues[0] = "Hello, Akash ";
-		dialogues[1] = "So you've come to this island to find the treasure ?";
-		dialogues[2] = "I used to be a great wizard but now... I'm bit too old for taking an adventure.";
+		dialogues[1] = "So you've come to this island to \nfind the treasure ?";
+		dialogues[2] = "I used to be a great wizard but now... \nI'm bit too old for taking an adventure.";
 		dialogues[3] = "Well Good Luck for you.";
 	}
     public void setAction() {
@@ -60,10 +60,8 @@ public class NPC_OldMan extends Entity {
 	   } 
    }
     public void speak() {
-    	if(dialogues[dialogueIndex] == null) {
-    		dialogueIndex = 0 ;
-    	}
-    	gp.ui.currentDialogue = dialogues[dialogueIndex];
-    	dialogueIndex++;
+    	
+       // Do this Chararter specific stuff
+       super.speak();
     }
 }
