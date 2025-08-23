@@ -179,6 +179,7 @@ public class Player extends Entity {
 		if(i != 999) {
 		//	System.out.println("u are hitting on an npc");
 			gp.gameState = gp.dialogueState;
+			gp.npc[i].speak();
 		}
 	}
 	

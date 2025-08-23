@@ -29,11 +29,16 @@ public class Entity { // this stores variables that will be used in player , mon
 	public boolean collision = false;
 	public boolean collisionOn;
 	public int actionLockCounter = 0;
+	String dialogues[] = new String[20];
+	int dialogueIndex = 0;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
 	public void setAction() {
+		
+	}
+	public void speak() {
 		
 	}
 	public void update() {
