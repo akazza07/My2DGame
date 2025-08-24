@@ -58,7 +58,10 @@ public class UI {
 	   g2.setFont(maruMonica);
 	   g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	   g2.setColor(Color.white);
-	   
+	   // TITLE STATE
+	   if(gp.gameState == gp.titleState) {
+		   drawTitleScreen();
+	   }
 	   // PLAY STATE
 	   if(gp.gameState == gp.playState) {
 		   // Do playState stuff later
@@ -130,6 +133,28 @@ public class UI {
 			   }
 		   }
 	   } */
+   }
+   public void drawTitleScreen() {
+	   
+	   g2.setColor(new Color(0,0,0));
+	   g2.fillRect(0, 0 , gp.screenWidth, gp.screenHeight);
+	   // TITLE NAME
+	   g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+	   String text = "Treasure Hunter";
+	   int x = getXforCenteredText(text);
+	   int y = gp.tileSize*3;
+	   
+	   // SHADOW
+	   g2.setColor(Color.gray);
+	   g2.drawString(text,x+5,y+5);
+	   // MAIN COLOR
+	   g2.setColor(Color.white);
+       g2.drawString(text, x, y);
+       // CHARACTER IMAGE
+       x = gp.screenWidth/2 - (gp.tileSize*2)/2 ; // center position 
+       y += gp.tileSize*2;
+       g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2,null);
+       
    }
    public void drawPauseScreen() {
 	   

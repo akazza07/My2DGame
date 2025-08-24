@@ -48,8 +48,10 @@ public final class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this,KeyH);
     public SuperObject obj[] = new SuperObject[10]; // we prepared 10 slots during the game 
     public Entity npc[] = new Entity[10];
+    
     // GAME STATE
        public int gameState;
+       public final int titleState = 0 ;
        public final int playState = 1;
        public final int pauseState = 2;
        public final int dialogueState = 3;
@@ -73,8 +75,8 @@ public final class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
     	aSetter.setObjects();
     	aSetter.setNPC();
-    	playMusic(0);
-    	gameState = playState;
+    	//playMusic(0);
+    	gameState = titleState;
     }
     public void startGameThread() {
     	gameThread = new Thread(this);
@@ -185,28 +187,35 @@ public final class GamePanel extends JPanel implements Runnable{
 		if(KeyH.checkDrawTime == true ) {
 			drawStart = System.nanoTime();
 		}
-		
-		
-		// tile
-		tileM.draw(g2); // make sure this line firstly implement than player draw line.
-		
-		//object
-		for(int i = 0; i< obj.length; i++) {
-			if(obj[i] != null) {
-				obj[i].draw(g2,this);
-			}
+		// TITLE SCREEN
+		if(gameState == titleState) {
+			ui.draw(g2);
 		}
-		// NPC 
-		for(int i = 0 ; i < npc.length ; i++) {
-			if(npc[i] != null) {
-				npc[i].draw(g2);
+		// OTHER
+		else{
+			// tile
+			tileM.draw(g2); // make sure this line firstly implement than player draw line.
+			
+			//object
+			for(int i = 0; i< obj.length; i++) {
+				if(obj[i] != null) {
+					obj[i].draw(g2,this);
+				}
 			}
+			// NPC 
+			for(int i = 0 ; i < npc.length ; i++) {
+				if(npc[i] != null) {
+					npc[i].draw(g2);
+				}
+			}
+		    // PLAYER
+			player.draw(g2);
+			
+			// UI
+			ui.draw(g2);
 		}
-	    // PLAYER
-		player.draw(g2);
 		
-		// UI
-		ui.draw(g2);
+		
 		
 		// DEBUG function
 		if(KeyH.checkDrawTime == true) {
