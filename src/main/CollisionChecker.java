@@ -59,8 +59,7 @@ public class CollisionChecker {
 		if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision ==true) {
 			entity.collisionOn = true;
 		}
-			break;
-			
+			break;	
 		}
 	} 
 	public int checkObject (Entity entity , boolean player) {
@@ -120,7 +119,7 @@ public class CollisionChecker {
 							if(player == true ) {
 								index = i;
 							}
-							break;
+					break;
 					}			
 			}
 			entity.solidArea.x = entity.solidAreaDefaultX;
@@ -157,16 +156,14 @@ public class CollisionChecker {
 					entity.solidArea.y += entity.speed;
 					if(entity.solidArea.intersects(target[i].solidArea)) {
 					        entity.collisionOn = true;
-						        index = i;
-									
+						        index = i;				
 					}
 					break;
 				case"left":
 					entity.solidArea.x -= entity.speed;
 					if(entity.solidArea.intersects(target[i].solidArea)) {
 							entity.collisionOn = true;
-								index = i;
-							
+								index = i;		
 					}
 					break;
 				case"right":
