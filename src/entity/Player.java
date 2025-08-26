@@ -103,6 +103,7 @@ public class Player extends Entity {
 				
 				// CHECK EVENT
 				gp.eHandler.checkEvent();
+				gp.KeyH.enterPressed = false ;
 				
 				 // if collision is false , player can move 
 				if (collisionOn == false) {
@@ -190,7 +191,7 @@ public class Player extends Entity {
 				gp.npc[i].speak();
 			}	
 		}
-		gp.KeyH.enterPressed = false ;
+		
 	}
 	
 	public void draw(Graphics2D g2) {

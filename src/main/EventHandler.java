@@ -20,9 +20,10 @@ public class EventHandler {
 	
    }
    public void checkEvent() {
-	   if(hit(27,16,"right") == true ) { damagePit(gp.dialogueState);
+	   if(hit(27,16,"right") == true ) { damagePit(gp.dialogueState); }
+	   if(hit(23,12,"up") == true ) { healingPool(gp.dialogueState);  }
 	   
-	   }
+	   
    }
    public boolean hit(int eventCol , int eventRow , String reqDirection) {
 	   
@@ -51,5 +52,12 @@ public class EventHandler {
 	   gp.gameState = gameState;
 	   gp.ui.currentDialogue = "You fall into a pit";
 	   gp.player.life -= 1;
+   }
+   public void healingPool (int gameState) {
+	   if(gp.KeyH.enterPressed == true ) {
+		   gp.gameState = gameState;
+		   gp.ui.currentDialogue = "You Drink the water.\nYour life has been recovered.";
+		   gp.player.life = gp.player.maxLife;
+	   }
    }
 }
