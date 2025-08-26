@@ -34,14 +34,12 @@ public final class GamePanel extends JPanel implements Runnable{
     // SYSTEM
     TileManager tileM = new TileManager(this);
     public KeyHandler KeyH = new KeyHandler(this);
-    
     Sound music = new Sound();
     Sound se = new Sound();
-    
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
-    
+    public EventHandler eHandler = new EventHandler(this);
     Thread gameThread; // starting the Game clock
     
     // ENTITY AND OBJECT
