@@ -28,6 +28,8 @@ public class Entity { // this stores variables that will be used in player , mon
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn;
 	public int actionLockCounter = 0;
+	public boolean invincible = false;
+	public int invincibleCounter = 0;
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 	public BufferedImage image , image2 , image3;
@@ -74,6 +76,8 @@ public class Entity { // this stores variables that will be used in player , mon
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this,false);
+		gp.cChecker.checkEntity(this, gp.npc);
+		gp.cChecker.checkEntity(this, gp.monster);
 		gp.cChecker.checkPlayer(this);
 		
 		 // if collision is false , player can move 

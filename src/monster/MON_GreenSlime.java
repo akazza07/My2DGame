@@ -17,7 +17,7 @@ public class MON_GreenSlime extends Entity {
 		
 		solidArea.x = 3;
 		solidArea.y = 18;
-		solidArea.width = 43;
+		solidArea.width = 42;
 		solidArea.height = 30;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
