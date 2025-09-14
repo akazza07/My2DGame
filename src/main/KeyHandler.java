@@ -68,6 +68,9 @@ public class KeyHandler  implements KeyListener{ // KeyListener
 			if(code == KeyEvent.VK_P) {
 				gp.gameState = gp.pauseState;
 			}
+			if(code == KeyEvent.VK_C) {
+				gp.gameState = gp.characterState;
+			}
 			if(code == KeyEvent.VK_ENTER) {
 				enterPressed = true;
 			}
@@ -93,7 +96,12 @@ public class KeyHandler  implements KeyListener{ // KeyListener
 				gp.gameState = gp.playState;
 			}
 		}
-
+        // Character State
+		else if(gp.gameState == gp.characterState){
+			if(code == KeyEvent.VK_C) {
+				gp.gameState = gp.playState;
+			}
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

@@ -1,14 +1,14 @@
 package entity;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 public class Player extends Entity {
   
@@ -19,7 +19,7 @@ public class Player extends Entity {
 	public final int screenY;
 //	public int hasKey = 0;
 	int standCounter = 0;
-	
+	public boolean attackCanceled = false;
 	
 	
 	 public Player(GamePanel gp , KeyHandler KeyH) {
@@ -56,8 +56,24 @@ public class Player extends Entity {
 		 direction = "down";
 		 
 		 // PLAYER STATUS
+		 level = 1;
 		 maxLife = 6;
 		 life = maxLife; // in this game one life means half heart and two life means full heart so six lifes three hearts
+	     strength = 1; // the more strength he has , the more damage he gives
+	     dexterity = 1; // the more dexterity he has , the less damage he recieves.
+	     exp = 0;
+	     nextLevelExp = 5;
+	     coin = 0;
+	     currentWeapon = new OBJ_Sword_Normal(gp);
+	     currentShield = new OBJ_Shield_Wood(gp);
+	     attack = getAttack(); // the total attack value is decided bty strength and weapon
+	     defence = getDefence(); // the total defence value is decided by dexterity and shield
+	}
+	public int getAttack() {
+		return attack = strength * currentWeapon.attackValue;
+	}
+	public int getDefence() {
+		return defence = dexterity * currentShield.defenceValue;
 	}
 	public void getPlayerImage() {
 
@@ -129,6 +145,13 @@ public class Player extends Entity {
 					case "right": worldX += speed;break;
 					}
 				}
+				if(KeyH.enterPressed == true && attackCanceled == false) {
+					gp.playSE(7);
+					attacking = true;
+					spriteCounter = 0;
+				}
+				attackCanceled = false;
+				
 				gp.KeyH.enterPressed = false;
 				
 				spriteCounter++;  // basically it means the player changes in every 10 frames
@@ -253,13 +276,10 @@ public class Player extends Entity {
 //		System.out.println("u are hitting on an npc");
 		if(gp.KeyH.enterPressed == true ) {
 			if(i != 999) {
+				        attackCanceled = true;
 						gp.gameState = gp.dialogueState;
 						gp.npc[i].speak();	
 				}
-				else {
-					gp.playSE(7);
-						attacking = true;
-					}
 		    }
 	}
 	
