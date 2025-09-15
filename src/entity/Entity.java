@@ -65,6 +65,7 @@ public class Entity { // this stores variables that will be used in player , mon
 	//  ITEM ATTRIBUTES
 	public int attackValue;
 	public int defenceValue;
+	public String description = "";
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
