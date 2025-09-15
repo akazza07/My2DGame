@@ -114,7 +114,11 @@ public class Entity { // this stores variables that will be used in player , mon
 			if(gp.player.invincible == false ) {
 				// we can give damage
 				gp.playSE(6);
-				gp.player.life -= 1;
+				int damage = attack - gp.player.defence;
+				if(damage < 0) {
+					damage = 0;
+				}
+				gp.player.life -= damage;
 				gp.player.invincible = true ;
 			}
 		}
