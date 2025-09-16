@@ -10,6 +10,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
+import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -65,7 +66,10 @@ public class Player extends Entity {
 		 level = 1;
 		 maxLife = 6;
 		 life = maxLife; // in this game one life means half heart and two life means full heart so six lifes three hearts
-	     strength = 1; // the more strength he has , the more damage he gives
+	     maxMana = 4;
+	     mana = maxMana;
+	     ammo = 10;
+		 strength = 1; // the more strength he has , the more damage he gives
 	     dexterity = 1; // the more dexterity he has , the less damage he recieves.
 	     exp = 0;
 	     nextLevelExp = 5;
@@ -73,6 +77,7 @@ public class Player extends Entity {
 	     currentWeapon = new OBJ_Sword_Normal(gp);
 	     currentShield = new OBJ_Shield_Wood(gp);
 	     projectile = new OBJ_Fireball(gp);
+	     //projectile = new OBJ_Rock(gp);
 	     attack = getAttack(); // the total attack value is decided bty strength and weapon
 	     defence = getDefence(); // the total defence value is decided by dexterity and shield
 	}
@@ -202,10 +207,14 @@ public class Player extends Entity {
 				}
 			}
 	        
-	     if (gp.KeyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+	     if (gp.KeyH.shotKeyPressed == true && projectile.alive == false
+	    		 && shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
 	    	 
 	    	 // SET DEFAULT COORDINATES , DIRECTION AND USER 
 	    	 projectile.set(worldX,worldY,direction,true,this);
+	    	 
+	    	 // SUBTRACT THE COST (MANA , AMMO ETC.)
+	    	 projectile.subtractResource(this);
 	    	 
 	    	 // ADD IT TO THE LIST
 	    	 gp.projectileList.add(projectile);

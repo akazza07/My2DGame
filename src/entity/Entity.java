@@ -54,6 +54,7 @@ public class Entity { // this stores variables that will be used in player , mon
 	public int life;
 	public int maxMana;
 	public int mana;
+	public int ammo;
 	public int level;
 	public int strength;
 	public int dexterity;
@@ -131,16 +132,7 @@ public class Entity { // this stores variables that will be used in player , mon
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
 		if(this.type == type_monster && contactPlayer == true ) {
-			if(gp.player.invincible == false ) {
-				// we can give damage
-				gp.playSE(6);
-				int damage = attack - gp.player.defence;
-				if(damage < 0) {
-					damage = 0;
-				}
-				gp.player.life -= damage;
-				gp.player.invincible = true ;
-			}
+		   damagePlayer(attack);
 		}
 		
 		 // if collision is false , player can move 
@@ -171,6 +163,21 @@ public class Entity { // this stores variables that will be used in player , mon
 				invincible = false;
 				invincibleCounter =0 ;
 			}
+		}
+		if(shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+	}
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false ) {
+			// we can give damage
+			gp.playSE(6);
+			int damage = attack - gp.player.defence;
+			if(damage < 0) {
+				damage = 0;
+			}
+			gp.player.life -= damage;
+			gp.player.invincible = true ;
 		}
 	}
 	public void draw(Graphics2D g2) {
@@ -228,7 +235,7 @@ public class Entity { // this stores variables that will be used in player , mon
 			if(dying == true) {
 				dyingAnimation(g2);
 			}
-		       g2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+		       g2.drawImage(image,screenX,screenY,null);
 		       changeAlpha(g2,1f);
 		}
 	}
