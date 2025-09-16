@@ -241,7 +241,6 @@ public class Entity { // this stores variables that will be used in player , mon
 		if(dyingCounter <= i*6 && dyingCounter <= i*7) {changeAlpha(g2,0f);}
 		if(dyingCounter <= i*7 && dyingCounter <= i*8) {changeAlpha(g2,1f);}
 		if(dyingCounter >  i*8) {
-			dying = false;
 			alive = false;
 		}
 	}
