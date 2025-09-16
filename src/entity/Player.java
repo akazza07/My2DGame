@@ -8,11 +8,12 @@ import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Axe;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
-import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+
 
 public class Player extends Entity {
   
@@ -74,7 +75,8 @@ public class Player extends Entity {
 	     exp = 0;
 	     nextLevelExp = 5;
 	     coin = 0;
-	     currentWeapon = new OBJ_Sword_Normal(gp);
+	     //currentWeapon = new OBJ_Sword_Normal(gp);
+	     currentWeapon = new OBJ_Axe(gp);
 	     currentShield = new OBJ_Shield_Wood(gp);
 	     projectile = new OBJ_Fireball(gp);
 	     //projectile = new OBJ_Rock(gp);
@@ -161,6 +163,9 @@ public class Player extends Entity {
 				// check Monster collision
 				int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 				contactMonster(monsterIndex);
+				
+				// check interactive tile collision
+				int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
 				
 				// CHECK EVENT
 				gp.eHandler.checkEvent();
@@ -272,6 +277,9 @@ public class Player extends Entity {
 			// Check monster colision with the updated worldX , worldY and solidArea
 			int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
 			damageMonster(monsterIndex , attack );
+			
+			int iTileIndex =  gp.cChecker.checkEntity(this,gp.iTile);
+			damageInteractiveTile(iTileIndex);
 			
 			// After checking collision , restore the original data
 			worldX = currentWorldX;
@@ -399,6 +407,19 @@ public class Player extends Entity {
 					checkLevelUp();
 				}
 			}
+		}
+	}
+	public void damageInteractiveTile(int i) {
+		if(i != 999 && gp.iTile[i].destructible == true
+				&& gp.iTile[i].isCorrectItem(this) == true && gp.iTile[i].invincible == false ) {
+			
+			gp.iTile[i].playSE();
+			gp.iTile[i].life--;
+			gp.iTile[i].invincible = true ;
+			
+			if(gp.iTile[i].life == 0) {
+				gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+			}	
 		}
 	}
 	public void checkLevelUp() {

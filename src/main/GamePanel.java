@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
+import tile_interactive.InteractiveTile;
 
 public final class GamePanel extends JPanel implements Runnable{
     // Screen settings
@@ -50,6 +51,7 @@ public final class GamePanel extends JPanel implements Runnable{
     public Entity obj[] = new Entity[20]; // we prepared 10 slots during the game 
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
+    public InteractiveTile iTile[] = new InteractiveTile[50];
     public ArrayList<Entity>projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
     
@@ -81,6 +83,7 @@ public final class GamePanel extends JPanel implements Runnable{
     	aSetter.setObjects();
     	aSetter.setNPC();
     	aSetter.setMonster();
+    	aSetter.setInteractiveTile();
     	//playMusic(0);
     	gameState = titleState;
     }
@@ -193,6 +196,11 @@ public final class GamePanel extends JPanel implements Runnable{
 					}
 				}
 			}
+			for(int i = 0; i < iTile.length;i++) {
+				if(iTile[i] != null) {
+					iTile[i].update();
+				}
+			}
 		}
 		if(gameState == pauseState) {
 			// nothing
@@ -223,6 +231,12 @@ public final class GamePanel extends JPanel implements Runnable{
 			// tile
 			tileM.draw(g2); // make sure this line firstly implement than player draw line.
 			
+			// INTERACTIVE TILE
+			for(int i = 0 ; i < iTile.length ; i++) {
+				if(iTile[i] != null) {
+					iTile[i].draw(g2);
+				}
+			}
 			// ADD ENTITIES TO THE LIST
             entityList.add(player);
             for(int i = 0 ; i < npc.length ; i++) {
