@@ -44,8 +44,9 @@ public class Player extends Entity {
 		 solidArea.width = 32;
 		 solidArea.height = 32;
 		 
-		 attackArea.width = 36;
-		 attackArea.height = 36;
+		 // ATTACK AREA
+		 //attackArea.width = 36;
+		 //attackArea.height = 36;
 		 
 		 setDefaultValues();
 		 getPlayerImage();
@@ -81,6 +82,7 @@ public class Player extends Entity {
 		
 	}
 	public int getAttack() {
+		attackArea = currentWeapon.attackArea;
 		return attack = strength * currentWeapon.attackValue;
 	}
 	public int getDefence() {
@@ -100,15 +102,26 @@ public class Player extends Entity {
 	}
 	public void getPlayerAttackImage() {
 		
-		attackUp1 = setup("/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
-		attackUp2 = setup("/player/boy_attack_up_2",gp.tileSize,gp.tileSize*2);
-		attackDown1 = setup("/player/boy_attack_down_1",gp.tileSize,gp.tileSize*2);
-		attackDown2 = setup("/player/boy_attack_down_2",gp.tileSize,gp.tileSize*2);
-		attackLeft1 = setup("/player/boy_attack_left_1",gp.tileSize*2,gp.tileSize);
-		attackLeft2 = setup("/player/boy_attack_left_2",gp.tileSize*2,gp.tileSize);
-		attackRight1 = setup("/player/boy_attack_right_1",gp.tileSize*2,gp.tileSize);
-		attackRight2 = setup("/player/boy_attack_right_2",gp.tileSize*2,gp.tileSize);
-		
+		if(currentWeapon.type == type_sword) {
+			attackUp1 = setup("/player/boy_attack_up_1",gp.tileSize,gp.tileSize*2);
+			attackUp2 = setup("/player/boy_attack_up_2",gp.tileSize,gp.tileSize*2);
+			attackDown1 = setup("/player/boy_attack_down_1",gp.tileSize,gp.tileSize*2);
+			attackDown2 = setup("/player/boy_attack_down_2",gp.tileSize,gp.tileSize*2);
+			attackLeft1 = setup("/player/boy_attack_left_1",gp.tileSize*2,gp.tileSize);
+			attackLeft2 = setup("/player/boy_attack_left_2",gp.tileSize*2,gp.tileSize);
+			attackRight1 = setup("/player/boy_attack_right_1",gp.tileSize*2,gp.tileSize);
+			attackRight2 = setup("/player/boy_attack_right_2",gp.tileSize*2,gp.tileSize);
+		}
+		if(currentWeapon.type == type_axe) {
+			attackUp1 = setup("/player/boy_axe_up_1",gp.tileSize,gp.tileSize*2);
+			attackUp2 = setup("/player/boy_axe_up_2",gp.tileSize,gp.tileSize*2);
+			attackDown1 = setup("/player/boy_axe_down_1",gp.tileSize,gp.tileSize*2);
+			attackDown2 = setup("/player/boy_axe_down_2",gp.tileSize,gp.tileSize*2);
+			attackLeft1 = setup("/player/boy_axe_left_1",gp.tileSize*2,gp.tileSize);
+			attackLeft2 = setup("/player/boy_axe_left_2",gp.tileSize*2,gp.tileSize);
+			attackRight1 = setup("/player/boy_axe_right_1",gp.tileSize*2,gp.tileSize);
+			attackRight2 = setup("/player/boy_axe_right_2",gp.tileSize*2,gp.tileSize);
+		}
 	}
 
 	public void update() {
@@ -242,6 +255,21 @@ public class Player extends Entity {
 	public void pickUpObject(int i) {
 		if(i != 999) {
 			
+			String text;
+			if(inventory.size() != maxInventorySize) {
+				
+				inventory.add(gp.obj[i]);
+				gp.playSE(1);
+				text = "You Got a " + gp.obj[i].name + "!";
+				
+			}
+			else {
+				text = "You cannot carry any more!";
+				
+			}
+			gp.ui.addMessage(text);
+			gp.obj[i] = null;
+			
 			
 	/*		String objectName = gp.obj[i].name;
 			
@@ -345,6 +373,26 @@ public class Player extends Entity {
 			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!"; 
+		}
+	}
+	public void selectItem() {
+		int itemIndex = gp.ui.getItemIndexOnSlot();
+		if(itemIndex < inventory.size()) {
+			Entity selectedItem = inventory.get(itemIndex);
+			
+			if(selectedItem.type == type_sword || selectedItem.type == type_axe) {
+				currentWeapon = selectedItem;
+				attack = getAttack();
+				getPlayerAttackImage();
+			}
+			if(selectedItem.type == type_shield ) {
+				currentShield = selectedItem;
+				defence = getDefence();	
+			}
+			if(selectedItem.type == type_consumable) {
+				selectedItem.use(this);
+				inventory.remove(itemIndex);
+			}
 		}
 	}
 	public void draw(Graphics2D g2) {
