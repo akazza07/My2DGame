@@ -13,7 +13,7 @@ public class Main {
 		                               // properly close when user clicks the close ("X") button.
 		window.setResizable(false);
 		window.setTitle("My2DGame");
-		window.setUndecorated(true);
+		//window.setUndecorated(true);
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
