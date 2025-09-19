@@ -148,6 +148,7 @@ public class Entity { // this stores variables that will be used in player , mon
 		return maxLife;
 	}
 	public void generateParticle(Entity generator , Entity target) {
+		
 		Color color = generator.getParticleColor();
 		int size = generator.getParticleSize();
 		int speed = generator.getParticleSpeed(); 
@@ -157,6 +158,7 @@ public class Entity { // this stores variables that will be used in player , mon
 		Particle p2 = new Particle(gp,target,color,size,speed,maxLife,2,-1);
 		Particle p3 = new Particle(gp,target,color,size,speed,maxLife,-2,1);
 		Particle p4 = new Particle(gp,target,color,size,speed,maxLife,2,1);
+		
 		gp.particleList.add(p1);
 		gp.particleList.add(p2);
 		gp.particleList.add(p3);
