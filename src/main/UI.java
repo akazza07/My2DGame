@@ -107,67 +107,10 @@ public class UI {
 	   if(gp.gameState == gp.optionsState) {
 		   drawOptionsScreen();
 	   }
-	   
-/*	   if(gameFinished == true ) {
-		   
-		   g2.setFont(arial_40);                   
-		   g2.setColor(Color.white);
-		   
-		   String text;
-		   int textLength;
-		   int x;
-		   int y;
-		   
-		   text = "You found the treasure!";
-		   textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-		   x = gp.screenWidth/2 - textLength/2 ;
-		   y = gp.screenHeight/2 - (gp.tileSize*3);
-		   g2.drawString(text,x,y);
-		  
-		   
-		   text = "Your Time is : " + dFormat.format(playTime) + "!";
-		   textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-		   x = gp.screenWidth/2 - textLength/2 ;
-		   y = gp.screenHeight/2 + (gp.tileSize*4);
-		   g2.drawString(text,x,y);
-		   
-		   
-		   g2.setFont(arial_80B);                   
-		   g2.setColor(Color.yellow);
-			
-		   text = "Congratulations!";
-		   textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();   
-		   x = gp.screenWidth/2 - textLength/2 ;
-		   y = gp.screenHeight/2 + (gp.tileSize*2);
-		   g2.drawString(text,x,y);
-		   
-		  
-		   gp.gameThread = null ;
-	       } else {
-		   g2.setFont(arial_40);                   // Dont instantiate it in the loop
-		   g2.setColor(Color.white);
-		   g2.drawImage(keyImage , gp.tileSize/2 , gp.tileSize/2 , gp.tileSize , gp.tileSize , null);
-		   g2.drawString("x "+ gp.player.hasKey,74,65);
-		   
-		   // TIME 
-		   
-		   playTime  += (double)1/60;
-		   g2.drawString("Time:"+ dFormat.format(playTime), gp.tileSize*11 , 65);
-		   
-		   // MESSAGE
-		   if(messageOn == true) {
-			   
-			   g2.setFont(g2.getFont().deriveFont(30F));
-			   g2.drawString(message, gp.tileSize/2, gp.tileSize*5);
-			   
-			   messageCounter++;
-			   
-			   if(messageCounter > 120) { // 2sec
-				   messageCounter = 0;
-				   messageOn = false;
-			   }
-		   }
-	   } */
+	   // GAME OVER STATE
+	   if(gp.gameState == gp.gameOverState) {
+		   drawGameOverScreen();
+	   }
    }
    public void drawPlayerLife() {
 	   
@@ -480,6 +423,46 @@ public class UI {
 		   }
 	   }
    }
+   public void drawGameOverScreen() {
+	   
+	   g2.setColor(new Color(0,0,0,150));
+	   g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+	   
+	   int x;
+	   int y;
+	   String text;
+	   g2.setFont(g2.getFont().deriveFont(Font.BOLD,110f));
+	   
+	   text = "Game Over";
+	   // Shadow
+	   g2.setColor(Color.black);
+	   x = getXforCenteredText(text);
+	   y = gp.tileSize*4;
+	   g2.drawString(text, x, y);
+	  
+	   // main
+	   g2.setColor(Color.white);
+	   g2.drawString(text, x-4, y-4);
+	   
+	   // retry
+	   g2.setFont(g2.getFont().deriveFont(50f));
+	   text = "Retry";
+	   x = getXforCenteredText(text);
+	   y += gp.tileSize*4;
+	   
+	   g2.drawString(text, x, y);
+	   if(commandNum == 0) {
+		   g2.drawString(">", x-40, y);
+	   }
+	   // back to the title screen
+	   text = "Quit";
+	   x = getXforCenteredText(text);
+	   y += 55;
+	   g2.drawString(text, x, y);
+	   if(commandNum == 1) {
+		   g2.drawString(">", x-40, y);
+	   }
+   }
    public void drawOptionsScreen() {
 	   g2.setColor(Color.white);
 	   g2.setFont(g2.getFont().deriveFont(32F));
@@ -588,6 +571,8 @@ public class UI {
 	   g2.drawRect(textX, textY, 120, 24);
 	   volumeWidth = 24 * gp.se.volumeScale;
 	   g2.fillRect(textX, textY, volumeWidth, 24);
+	   
+	   gp.config.saveConfig();
 	   
    }
    public void options_fullScreenNotification(int frameX , int frameY) {

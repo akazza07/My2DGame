@@ -13,10 +13,14 @@ public class Main {
 		                               // properly close when user clicks the close ("X") button.
 		window.setResizable(false);
 		window.setTitle("My2DGame");
-		//window.setUndecorated(true);
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
+		
+		gamePanel.config.loadConfig();
+		if(gamePanel.fullScreenOn == true) {
+			window.setUndecorated(true);
+		}
 		
 		window.pack(); // Causes this window to be sized to fit the 
 		               //preferred size and layouts of its subcomponents (=GamePanel).

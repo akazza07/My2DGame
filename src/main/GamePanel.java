@@ -54,6 +54,7 @@ public final class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread; // starting the Game clock
     
     // ENTITY AND OBJECT
@@ -74,6 +75,9 @@ public final class GamePanel extends JPanel implements Runnable{
        public final int dialogueState = 3;
        public final int characterState = 4;
        public final int optionsState = 5;
+       public final int gameOverState = 6;
+       
+       
     // set player's default position
     // int playerX = 100;
     // int playerY = 100;
@@ -102,7 +106,30 @@ public final class GamePanel extends JPanel implements Runnable{
     	tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
     	g2 = (Graphics2D)tempScreen.getGraphics();
     	
-    	//setFullScreen();
+    	if(fullScreenOn == true) {
+    		setFullScreen();
+    	}
+    	
+    }
+    public void retry() {
+    	
+    	player.setDefaultPositions();
+    	player.restoreLifeAndMan();
+    	aSetter.setNPC();
+    	aSetter.setMonster();
+    
+    }
+    public void restart() {
+    	
+    	player.setDefaultValues();
+    	player.setDefaultPositions();
+    	player.restoreLifeAndMan();
+    	player.setItems();
+    	aSetter.setObjects();
+    	aSetter.setNPC();
+    	aSetter.setMonster();
+    	aSetter.setInteractiveTile();
+    	
     }
     public void setFullScreen() {
     	
