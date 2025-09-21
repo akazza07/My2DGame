@@ -83,6 +83,7 @@ public class Player extends Entity {
 	     attack = getAttack(); // the total attack value is decided bty strength and weapon
 	     defence = getDefence(); // the total defence value is decided by dexterity and shield
 	}
+	
 	public void setDefaultPositions() {
 		worldX = gp.tileSize * 23;
 		worldY = gp.tileSize * 21;
@@ -93,6 +94,7 @@ public class Player extends Entity {
 		mana = maxMana;
 		invincible = false;
 	}
+	
 	public void setItems() {
 		
 		inventory.clear();
@@ -259,10 +261,7 @@ public class Player extends Entity {
 			   }
 			if(life <= 0) {
 				gp.gameState = gp.gameOverState;
-				gp.ui.commandNum = -1;
 				gp.stopMusic();
-				gp.playSE(12);
-				
 			}
 		}
 	
@@ -337,47 +336,9 @@ public class Player extends Entity {
 				}
 				gp.ui.addMessage(text);
 				gp.obj[i] = null;
-				
 			}
 		  }		
 		}
-	/*		String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case"Key":
-				gp.playSE(1);
-				hasKey++;
-				gp.obj[i] = null;
-				gp.ui.showMessage("You got a Key!!");
-				break;
-			case"Door":
-				if(hasKey > 0) {
-					gp.playSE(3);
-					gp.obj[i] = null;
-				
-					hasKey--;
-					gp.ui.showMessage("You opened the door!");
-				}else {
-					gp.ui.showMessage("You need a Key!");
-				}	
-				break;
-				
-			case "Carrot":
-				gp.playSE(2);
-				speed += 1.7;  // How much power get the player
-				gp.obj[i] = null;
-				gp.ui.showMessage("Speed Up!");
-				break;
-			
-			case "Chest":
-				gp.ui.gameFinished = true;
-				gp.stopMusic();
-				gp.playSE(4);
-				break;
-			} 
-			**/
-	
-	
 	public void interactNPC(int i ) {
 		
 //		System.out.println("u are hitting on an npc");

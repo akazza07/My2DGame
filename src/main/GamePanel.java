@@ -54,7 +54,6 @@ public final class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
-    Config config = new Config(this);
     Thread gameThread; // starting the Game clock
     
     // ENTITY AND OBJECT
@@ -76,14 +75,6 @@ public final class GamePanel extends JPanel implements Runnable{
        public final int characterState = 4;
        public final int optionsState = 5;
        public final int gameOverState = 6;
-       
-       
-    // set player's default position
-    // int playerX = 100;
-    // int playerY = 100;
-    // int playerSpeed = 4;
-    
-    // create constructor
     
     public GamePanel() {
     	this.setPreferredSize(new Dimension(screenWidth,screenHeight) );
@@ -121,8 +112,8 @@ public final class GamePanel extends JPanel implements Runnable{
     }
     public void restart() {
     	
-    	player.setDefaultValues();
     	player.setDefaultPositions();
+    	player.restoreLifeAndMan();
     	player.restoreLifeAndMan();
     	player.setItems();
     	aSetter.setObjects();
@@ -146,47 +137,7 @@ public final class GamePanel extends JPanel implements Runnable{
     public void startGameThread() {
     	gameThread = new Thread(this);
        	gameThread.start();
-                           // its automatically call this run methods |
-       	                   //                                       <--
     }
-	@Override
-	
-//	public void run() {   // create a game loop which will be the core of our game
-		 // Sleep method
-		 
-//		double drawInterval = 1000000000/FPS; // this 1 seconds 
-//		double nextDrawTime = System.nanoTime() + drawInterval;
-//		
-//		 while(gameThread != null) {
-//			
-////    long currentTime = System.nanoTime();
-//      Return the current value of the running java virtual machine's high-resolution time source, in nanoseconds.
-////    long currentTime2 = System.currentTimeMillis();
-////    System.out.println("current Time: "+currentTime);
-////    1 UPDATE : Update information such as character positions
-//	    update();
-// //  2 DRAW : Draw the screen with the updated information 
-//      repaint();
-//			 
-//			 
-//			 try {
-//			      double remainingTime = nextDrawTime - System.nanoTime();
-//			      remainingTime = remainingTime/1000000;
-//			 
-//			 if(remainingTime < 0) {
-//				 remainingTime = 0;
-//			 }
-//			
-//				Thread.sleep((long)remainingTime);
-//				
-//				nextDrawTime += drawInterval;
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		 }
-//	}
-	
 	public void run() {
 		
 		double drawInterval = 1000000000/FPS;
@@ -362,11 +313,11 @@ public final class GamePanel extends JPanel implements Runnable{
 			int y = 400;
 			int lineHeight = 20;
 			
-			g2.drawString("WorldX "+ player.worldX , x, y); y += lineHeight;
-			g2.drawString("WorldY "+ player.worldY , x, y); y += lineHeight;
-			g2.drawString("Col " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
-			g2.drawString("Row " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
-			g2.drawString("Draw Time: " + passed , x , y);
+			g2.drawString("WorldX = "+ player.worldX , x, y); y += lineHeight;
+			g2.drawString("WorldY = "+ player.worldY , x, y); y += lineHeight;
+			g2.drawString("Col = " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
+			g2.drawString("Row = " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+			g2.drawString("Draw Time = " + passed , x , y);
 		}
 	}
 	public void drawToScreen() {

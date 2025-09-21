@@ -1,0 +1,58 @@
+[33mcc0294a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Add Game Over State
+[33me39ae0a[m Add Options Menu
+[33mfdf146f[m add full screen
+[33me4d4fda[m code update
+[33m5417832[m Add particles
+[33m7abf66d[m Breaking Objects
+[33mf147a49[m Item Drops
+[33mc5f1ff3[m Monster projectiles and Mana
+[33m89d6ba6[m Projectile
+[33m7fbb3bd[m code update
+[33m1d7b1e0[m Equip & Use Items
+[33m79b1dee[m Add inventory
+[33mb40ccab[m Sight Optimize
+[33mfaacd58[m Creating Useful Functions
+[33mdb2879b[m Scrolling Message,Leveling Up,Damage Calculation
+[33me6e0888[m Add Character Status
+[33mb94fdd4[m Set a new GameState
+[33m9a03a27[m Add Health Bar
+[33m8b69884[m Add battle sounds effects and death animation
+[33m5e0fadf[m Hit Detection and Bug fix
+[33m9f0cd5e[m Visual effect to invincible state
+[33md958fe0[m Merged remote changes
+[33meb4f754[m Creating invincible time
+[33m23d1f99[m Create README.md
+[33m54e24ee[m Updating Monster
+[33m4386a1a[m Entity ArrayList
+[33m3a8f470[m Final Optimize
+[33m7ef1149[m Advanced Mechanics Event
+[33ma98bff5[m Create EventRect Class
+[33m23363be[m Add Teleport Tile
+[33m09ecab9[m Add Healing Pool
+[33mf0e6f25[m Add Damage Pit
+[33mbcfaab5[m Event 1
+[33m18b6b1e[m ADD Player Life
+[33m02aaea7[m Excecute Menu
+[33m01eca5d[m Add Cursor
+[33m941637a[m ADD TILE MENU
+[33m59d1a26[m Add Title Screen
+[33mc3182aa[m Add font Style
+[33m5daee62[m SuperSpeak
+[33mdf99284[m Adding Dialogues for NPC
+[33m66ea50c[m Add Window for Dialogue Box
+[33m380da38[m NPC to Player Collision
+[33m10baf3a[m Player to NPC collision
+[33m7ad2950[m Create Action Lock Counter
+[33maf66b95[m NPC Movement and AI
+[33mb821337[m Create NPC class
+[33mc01c991[m Add Game State
+[33mcc3c26d[m Fix bugs
+[33m0a287e1[m bug fix
+[33mca1ab91[m ADD NEW TILES
+[33m9fd6bb6[m New Grass
+[33m8cf7257[m Improving Rendering Performance
+[33m37cfd49[m Optimizing tile setup
+[33m2bf4335[m optimize
+[33m2de2ed3[m checking how long it is taking to draw
+[33m1e8a93d[m Modified
+[33m068728f[m My first Game

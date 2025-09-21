@@ -304,12 +304,12 @@ public class UI {
        
        value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
 	   textX = getXforAlignToRightText(value,textX);
-       g2.drawString(value, tailX, textY);
+       g2.drawString(value, tailX-25, textY);
        textY += lineHeight;
        
        value = String.valueOf(gp.player.mana + "/" + gp.player.maxMana);
 	   textX = getXforAlignToRightText(value,textX);
-       g2.drawString(value, tailX, textY);
+       g2.drawString(value, tailX-25, textY);
        textY += lineHeight;
        
        value = String.valueOf(gp.player.strength);
@@ -454,10 +454,12 @@ public class UI {
 	   if(commandNum == 0) {
 		   g2.drawString(">", x-40, y);
 	   }
+	   
 	   // back to the title screen
 	   text = "Quit";
 	   x = getXforCenteredText(text);
 	   y += 55;
+	   
 	   g2.drawString(text, x, y);
 	   if(commandNum == 1) {
 		   g2.drawString(">", x-40, y);
@@ -571,8 +573,6 @@ public class UI {
 	   g2.drawRect(textX, textY, 120, 24);
 	   volumeWidth = 24 * gp.se.volumeScale;
 	   g2.fillRect(textX, textY, volumeWidth, 24);
-	   
-	   gp.config.saveConfig();
 	   
    }
    public void options_fullScreenNotification(int frameX , int frameY) {
